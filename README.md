@@ -17,4 +17,5 @@ jQuery() 함수의 가장 기본적인 역할 new 연산자로, jQuery 객체를
 프로토타입 메서드를 호출 할 수 있다.
 
 ##id 셀렉터
+
 \$("#myDiv")는 jQuery("#myDiv")와 동일.
