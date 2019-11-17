@@ -16,6 +16,6 @@ jQuery() 함수의 가장 기본적인 역할 new 연산자로, jQuery 객체를
 이 객체는 프로토타입 체이닝으로, jQuery.prototype(prototype을 가진다) 객체에 포함된 <br>
 프로토타입 메서드를 호출 할 수 있다.
 
-##id 셀렉터
+## Id 셀렉터
 
 \$("#myDiv")는 jQuery("#myDiv")와 동일.
