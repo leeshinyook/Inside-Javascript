@@ -577,16 +577,23 @@ jQuery.extend({
       return r;
     }
   ],
+  // jQuery.find('#myDiv') 형태로 호출 >> t에는 '#myDiv'가 호출되고, context인자에는 undefined가 호출된다.
   find: function (t, context) {
     // Make sure that the context is a DOM Element
+    // context가 undefined이기 때문에, if문은 실행이 되지않는다.
     if (context && context.nodeType == undefined)
       context = null;
 
     // Set the correct context (if none is provided)
+    // context인자의 기본값을 할당. context가 undefined일 경우, jQuery.context값을 context에 재할당한다.
     context = context || jQuery.context || document;
 
+    // t.constrcutor is String 
     if (t.constructor != String) return [t];
 
+    // t는 '//', '/'를 포함하지않은 문자열이기 때문에, t.indexOf('/'), t.indexOf('//')는 모두 -1을 반환한다.
+    // string.indexOf(searchString) 메소드, 호출한 문자열에허 searchString 인자의 문자열을 검색한다.
+    // 문자열을 찾게 될 때 일치하는 첫 번째 문자의 위치를 반환한다. 그렇지 않은 경우 -1을 반환.
     if (!t.indexOf("//")) {
       context = context.documentElement;
       t = t.substr(2, t.length);
@@ -601,11 +608,19 @@ jQuery.extend({
     var ret = [context];
     var done = [];
     var last = null;
-
+    // t에서 while문 실행.
     while (t.length > 0 && last != t) {
       var r = [];
       last = t;
+      // jQuery.trim(t) t문자열의 양끝 공백 문자열을 제거한다.
+      // jQuery.trimg(str) >> str인자로 전달된 문자열 양 끝의 공백 문자를 제거한다.
 
+
+      // replace => string.replace(searchValue, replaceValue) 메서드
+      // 호출한 문자열을 대상으로 검색 및 치환작업을 수행한다. 
+      // searchValue = 검색할 문자열이나 정규표현식 객체
+      // replaceValue = 교체할 문자열이나 함수 
+      // replaceValue가 함수 일 경우, searchValue인자와 일치하는 값을 찾을때마다 이 함수가 호출된다.
       t = jQuery.trim(t).replace(/^\/\//i, "");
 
       var foundToken = false;
@@ -630,6 +645,9 @@ jQuery.extend({
         } else {
           var re2 = /^([#.]?)([a-z0-9\\*_-]*)/i;
           var m = re2.exec(t);
+          // m[0] = '#myDiv'
+          // m[1] = '#'
+          // m[2] = 'myDiv'
 
           if (m[1] == "#") {
             // Ummm, should make this work in all XML docs
@@ -640,6 +658,9 @@ jQuery.extend({
             if (!m[2] || m[1] == ".") m[2] = "*";
 
             for (var i = 0; i < ret.length; i++)
+              // jQuery.merge(first, second) == first배열에 second 배열의 인자를 합쳐서 새로운 배열을 반환한다.
+              // first배열에 second 배열의 원소가 이미 있다면, 해당 원소는 중복돼서 합쳐지지 않는다.
+              // ex $.merge([0,1,2],[2,3,4]) => [0,1,2,3,4]
               r = jQuery.merge(r,
                 m[2] == "*" ?
                 jQuery.getAll(ret[i]) :
