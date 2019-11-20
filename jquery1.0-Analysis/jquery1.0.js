@@ -76,11 +76,19 @@ function jQuery(a, c) {
     jQuery.find(a, c));
 
   // See if an extra function was provided
+  // this.get()이 실행뒤에 이 코드가 실행되는데, arguments객체는 함수를 호출할때 그 인자의 정보를 포함하는 객체이다.
+  // arguments.length = 인자의 수, fn은 호출된 마지막 인자를 가리킨다.
+  // new jQuery(a, c)를 수행 >> fn는 c를 가리키고 undefined를 할당받는다.
   var fn = arguments[arguments.length - 1];
 
   // If so, execute it in context
+  // fn이 undefined이기 때문에 또, 함수가 아니므로 아래는 실행되지 않는다.
   if (fn && fn.constructor == Function)
     this.each(fn);
+
+  // return문을 별도로 지정하지 않았기 때문에, 규칙에 따라 전달. 생성자 함수 형태로 호출할 떄, return을 지정하지않는다면,
+  // new로 새로 생성된 객체(this바인딩)가 생성자 함수의 리턴값으로 사용된다.
+  // $('#myDiv') 함수 호출의 최종결과로 리턴.
 }
 
 // Map over the $ in case of overwrite
