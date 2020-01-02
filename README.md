@@ -1,3 +1,10 @@
+# 인사이드 자바스크립트
+![8968480656_1](https://user-images.githubusercontent.com/55838461/71680761-46a5b800-2dce-11ea-9fc5-f7a4f8b8419e.jpg)
+
+저자: 송형주, 고현준
+
+위 책을 읽고, 스스로 정리한 내용을 위한 저장소입니다.
+
 # Jquery1.0
 
 Jquery1.0 소스코드 분석 <br>
